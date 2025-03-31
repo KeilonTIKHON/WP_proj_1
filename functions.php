@@ -33,3 +33,40 @@ function mytheme_register_menus() {
     ));
 }
 add_action('after_setup_theme', 'mytheme_register_menus');
+
+function register_custom_post_type_product() {
+    $labels = array(
+        'name'               => 'Products',
+        'singular_name'      => 'Product',
+        'menu_name'          => 'Products',
+        'name_admin_bar'     => 'Product',
+        'add_new'            => 'Add New',
+        'add_new_item'       => 'Add New Product',
+        'new_item'           => 'New Product',
+        'edit_item'          => 'Edit Product',
+        'view_item'          => 'View Product',
+        'all_items'          => 'All Products',
+        'search_items'       => 'Search Products',
+        'not_found'          => 'No products found',
+        'not_found_in_trash' => 'No products found in Trash'
+    );
+
+    $args = array(
+        'labels'             => $labels,
+        'public'             => true,
+        'publicly_queryable' => true,
+        'show_ui'            => true,
+        'show_in_menu'       => true,
+        'query_var'          => true,
+        'rewrite'            => array('slug' => 'product'),
+        'capability_type'    => 'post',
+        'has_archive'        => true,
+        'hierarchical'       => false,
+        'menu_position'      => 5,
+        'menu_icon'          => 'dashicons-cart',
+        'supports'           => array('title', 'editor', 'thumbnail', 'excerpt', 'custom-fields')
+    );
+
+    register_post_type('product', $args);
+}
+add_action('init', 'register_custom_post_type_product');
