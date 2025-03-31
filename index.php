@@ -3,6 +3,8 @@
 <?php
 while (have_posts()) {
     the_post(); ?>
-    hello
+    <div>Hiii</div>
 <?php }
 ?>
+
+<?php get_footer() ?>
