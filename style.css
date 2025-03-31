@@ -1,0 +1,10 @@
+/*
+Theme Name:mytheme
+*/
+
+body{
+    box-sizing: border-box;
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+}
