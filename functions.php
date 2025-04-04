@@ -1,5 +1,6 @@
 <?php
 
+
 function my_theme_setup() {
     // Регистрируем меню
     register_nav_menus(array(
@@ -14,18 +15,33 @@ function my_theme_setup() {
     add_theme_support('title-tag');
 }
 add_action('after_setup_theme', 'my_theme_setup');
+function mytheme_setup() {
+    add_theme_support('post-thumbnails'); // Включаем поддержку миниатюр
+    add_image_size('medium', 300, 200, true); // Устанавливаем кастомный размер medium (300x200, обрезка)
+}
+add_action('after_setup_theme', 'mytheme_setup');
 
-function my_theme_enqueue_styles() {
+function custom_product_query( $query ) {
+    if ( !is_admin() && $query->is_main_query() && is_post_type_archive('product') ) {
+        // Устанавливаем количество записей на страницу (например, 10)
+        $query->set( 'posts_per_page', 8 );
+    }
+}
+
+add_action( 'pre_get_posts', 'custom_product_query' );
+
+function mytheme_enqueue_styles() {
     // Подключаем Bootstrap CSS
     wp_enqueue_style('bootstrap-css', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
 
     // Подключаем основной стиль темы
     wp_enqueue_style('theme-style', get_stylesheet_uri());
+    wp_enqueue_style('main-style', get_stylesheet_uri());
 
     // Подключаем Bootstrap JS + Popper.js
     wp_enqueue_script('bootstrap-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js', array(), false, true);
 }
-add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
+add_action('wp_enqueue_scripts', 'mytheme_enqueue_styles');
 
 function mytheme_register_menus() {
     register_nav_menus(array(
