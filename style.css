@@ -1,0 +1,34 @@
+/*
+Theme Name:mytheme
+*/
+
+body{
+    box-sizing: border-box;
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+}
+
+.card-img-top{
+    height:100%;
+}
+.card_img_cont{
+    height:150px;
+}
+.product-card img {
+    
+    width: 150px;
+    height: 150px; /* Фиксируем высоту */
+    object-fit: contain; /* Заполняет область без искажения */
+    border-radius: 8px;
+}
+.thing{
+    padding: 15px;
+    height: 200px;
+}
+/*
+.card .card {
+    border: none;
+  }
+*/
+  

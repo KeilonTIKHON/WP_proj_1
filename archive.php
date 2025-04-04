@@ -1,6 +1,8 @@
 <?php get_header()?>
 
-<div>404))))))))))</div>
+<h2><?php the_archive_title() ?></h2>
+
+
 <?php
 while (have_posts()) {
     the_post(); ?>
@@ -9,5 +11,3 @@ while (have_posts()) {
     </div>
 <?php }
 ?>
-
-<?php get_footer() ?>
