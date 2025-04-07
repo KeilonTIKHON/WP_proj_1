@@ -26,9 +26,65 @@ body{
     padding: 15px;
     height: 200px;
 }
+.test{
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    
+}
+.meta_cont{
+    background-color: rgb(210, 210, 210);
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+}
+.meta_child_cont{
+    font-size: 20px;
+    margin: 20px;
+}
 /*
 .card .card {
     border: none;
   }
 */
+.comments-area {
+    margin-top: 2em;
+}
+
+.comment-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.comment {
+    margin-bottom: 1.5em;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1em;
+}
+
+.comment-author {
+    font-weight: bold;
+}
+
+.comment-form {
+    margin-top: 2em;
+}
+
+.comment-form input,
+.comment-form textarea {
+    width: 100%;
+    padding: 0.75em;
+    margin-bottom: 1em;
+    border: 1px solid #ccc;
+}
+.prod-image img{
+    width: 550px;
+    height: 550px; /* Фиксируем высоту */
+    object-fit: contain;
+}
+.add_to_cart{
+    width:200px;
+    margin: 30px;
+}
   

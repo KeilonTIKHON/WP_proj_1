@@ -49,6 +49,9 @@ function mytheme_register_menus() {
     ));
 }
 add_action('after_setup_theme', 'mytheme_register_menus');
+add_action('init', function() {
+    add_post_type_support('product', 'comments');
+});
 
 function register_custom_post_type_product() {
     $labels = array(
