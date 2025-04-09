@@ -38,7 +38,7 @@
 
                             <?php $price = get_field('price'); ?>
                             <?php if ($price) : ?>
-                                <p class="card-text"><strong>Price:</strong> <?php echo esc_html($price); ?> </p>
+                                <p class="card-text"><strong>Price:</strong> <?php echo esc_html($price) . " $"; ?> </p>
                             <?php endif; ?>
 
                             <p class="card-text"><?php the_excerpt(); ?></p>

@@ -20,13 +20,14 @@ while (have_posts()) {
 
             ?>
             <div>
-                <button class="add_to_cart">Add to cart</button>
+                
+                <button onclick="addToCart('<?php echo get_the_ID(); ?>', '<?php the_title(); ?>', <?php echo get_post_meta(get_the_ID(), 'price', true); ?>)" class="add_to_cart">Add to cart</button>
             </div>
 
             <div class="meta_cont">
                 <div class="meta_child_cont">
                     <?php
-                    echo "Price: " . $price;
+                    echo "Price: " . $price  . " $";
                     ?>
                 </div>
                 <div class="meta_child_cont">
@@ -54,9 +55,9 @@ while (have_posts()) {
             </div>
             <div>
                 <?php
-                // Проверка, открыты ли комментарии или есть ли уже комментарии
+                
                 if (comments_open() || get_comments_number()) {
-                    comments_template(); // Выводит список комментариев и форму
+                    comments_template(); 
                 }
                 ?>
             </div>
