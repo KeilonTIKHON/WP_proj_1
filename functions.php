@@ -1,6 +1,77 @@
 <?php
 
+add_action('wp_ajax_add_to_cart', 'handle_add_to_cart');
+add_action('wp_ajax_nopriv_add_to_cart', 'handle_add_to_cart');
 
+add_action('wp_ajax_update_cart_qty', 'handle_update_cart_qty');
+add_action('wp_ajax_nopriv_update_cart_qty', 'handle_update_cart_qty');
+
+add_action('wp_ajax_remove_from_cart', 'handle_remove_from_cart');
+add_action('wp_ajax_nopriv_remove_from_cart', 'handle_remove_from_cart');
+
+
+function handle_add_to_cart() {
+    $product_id = intval($_POST['id']);
+    $qty = intval($_POST['qty']);
+    $cart = isset($_COOKIE['cart']) ? json_decode(stripslashes($_COOKIE['cart']), true) : [];
+
+    $found = false;
+
+    foreach ($cart as &$item) {
+        if ($item['id'] == $product_id) {
+            $item['qty'] += $qty;
+            $found = true;
+            break;
+        }
+    }
+
+    if (!$found) {
+        $product = get_post($product_id);
+        $price = get_post_meta($product_id, 'price', true);
+        $cart[] = [
+            'id' => $product_id,
+            'name' => $product->post_title,
+            'price' => floatval($price),
+            'qty' => $qty,
+        ];
+    }
+
+    setcookie('cart', json_encode($cart), time() + 3600 * 24 * 7, "/");
+    wp_send_json_success($cart);
+}
+
+
+function handle_update_cart_qty() {
+    $product_id = intval($_POST['id']);
+    $qty = intval($_POST['qty']);
+    $cart = isset($_COOKIE['cart']) ? json_decode(stripslashes($_COOKIE['cart']), true) : [];
+
+    foreach ($cart as &$item) {
+        if ($item['id'] == $product_id) {
+            $item['qty'] = $qty;
+            break;
+        }
+    }
+
+    setcookie('cart', json_encode($cart), time() + 3600 * 24 * 7, "/");
+    wp_send_json_success($cart);
+}
+
+
+function handle_remove_from_cart() {
+    $product_id = intval($_POST['id']);
+    $cart = isset($_COOKIE['cart']) ? json_decode(stripslashes($_COOKIE['cart']), true) : [];
+
+    $cart = array_filter($cart, function($item) use ($product_id) {
+        return $item['id'] != $product_id;
+    });
+
+    
+    $cart = array_values($cart);
+
+    setcookie('cart', json_encode($cart), time() + 3600 * 24 * 7, "/");
+    wp_send_json_success($cart);
+}
 function my_theme_setup() {
     // Регистрируем меню
     register_nav_menus(array(

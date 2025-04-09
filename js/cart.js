@@ -5,19 +5,37 @@ document.addEventListener("DOMContentLoaded", function () {
     const cartTotal = document.getElementById("cart-total");
     const cartCount = document.getElementById("cart-count");
 
-    
+
     function getCart() {
         let cart = Cookies.get("cart");
         return cart ? JSON.parse(cart) : [];
     }
 
-    
-    function saveCart(cart) {
-        Cookies.set("cart", JSON.stringify(cart), { expires: 7 });
-        updateCartDisplay();
+
+    function sendAjax(action, data, callback) {
+        fetch('/wp-admin/admin-ajax.php', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: new URLSearchParams({
+                action: action,
+                ...data
+            })
+        })
+            .then(res => res.json())
+            .then(response => {
+                if (response.success) {
+                    Cookies.set("cart", JSON.stringify(response.data), { expires: 7 });
+                    updateCartDisplay();
+                    if (callback) callback(response.data);
+                } else {
+                    console.error("Ошибка AJAX:", response);
+                }
+            });
     }
 
-    
+
     function updateCartDisplay() {
         const cart = getCart();
         cartItemsContainer.innerHTML = "";
@@ -41,33 +59,26 @@ document.addEventListener("DOMContentLoaded", function () {
         cartCount.textContent = count;
     }
 
-    
+
     window.addToCart = function (id, name, price) {
-        const cart = getCart();
-        const itemIndex = cart.findIndex(item => item.id === id);
-
-        if (itemIndex > -1) {
-            cart[itemIndex].qty += 1;
-        } else {
-            cart.push({ id, name, price, qty: 1 });
+        sendAjax("add_to_cart", {
+            id: id,
+            qty: 1
         }
-
-        saveCart(cart);
+        );
     };
 
-    
+
     cartIcon.addEventListener("click", () => {
         cartPopup.style.display = cartPopup.style.display === "none" ? "block" : "none";
         updateCartDisplay();
     });
 
-    
+
     cartItemsContainer.addEventListener("click", function (e) {
         if (e.target.classList.contains("remove-btn")) {
             const id = e.target.dataset.id;
-            let cart = getCart();
-            cart = cart.filter(item => item.id !== id);
-            saveCart(cart);
+            sendAjax("remove_from_cart", { id: id });
         }
     });
 
@@ -75,11 +86,9 @@ document.addEventListener("DOMContentLoaded", function () {
         if (e.target.classList.contains("qty-input")) {
             const id = e.target.dataset.id;
             const qty = parseInt(e.target.value);
-            let cart = getCart();
-            const item = cart.find(item => item.id === id);
-            if (item) {
-                item.qty = qty > 0 ? qty : 1;
-                saveCart(cart);
+            
+            if (qty>0) {
+                sendAjax("update_cart_qty", { id: id, qty: qty });
             }
         }
     });
