@@ -12,9 +12,6 @@
         <div class="cont_container">
             <div class="container">
                 <a class="navbar-brand" href="#">MyTheme</a>
-
-
-
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <?php
                     wp_nav_menu(array(
@@ -24,8 +21,6 @@
                     ));
                     ?>
                 </div>
-
-
             </div>
             <div class="cart_Plus_menu">
                 <div id="cart-icon" style="position: relative; top:8px; left:-10px; cursor: pointer;">
@@ -34,7 +29,6 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
             </div>
         </div>
 
@@ -43,6 +37,11 @@
             <h3>Cart</h3>
             <div id="cart-items"></div>
             <div>Total: <span id="cart-total">0 $</span></div>
-            <button id="checkout-btn">place an order</button>
+            <div id="order-form">
+                <h3>Оформление заказа</h3>
+                <input type="text" id="order-name" placeholder="ФИО" required />
+                <input type="email" id="order-email" placeholder="Email" required />
+                <button id="checkout-button">Оформить заказ</button>
+            </div>
         </div>
     </nav>

@@ -1,9 +1,3 @@
-<?php
-if (post_password_required()) {
-    return;
-}
-?>
-
 <div id="comments" class="comments-area">
 
     <?php if (have_comments()) : ?>
@@ -30,7 +24,7 @@ if (post_password_required()) {
     <?php endif; ?>
 
     <?php
-    // Если комментарии закрыты, но есть комментарии — выводим сообщение.
+    
     if (!comments_open() && get_comments_number()) :
         ?>
         <p class="no-comments"><?php _e('Comments closed.', 'your-theme-textdomain'); ?></p>

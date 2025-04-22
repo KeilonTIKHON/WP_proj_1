@@ -1,7 +1,6 @@
 <?php get_header() ?>
 
 <?php
-while (have_posts()) {
     the_post(); ?>
     <div><?php ?>
         <h1>This is a product</h1>
@@ -15,7 +14,7 @@ while (have_posts()) {
             <?php
             $price = get_field("price");
             $descr = get_field("description");
-            $size = get_field("size");
+            $size = get_field("sizes");
             $color = get_field("color");
 
             ?>
@@ -78,6 +77,6 @@ while (have_posts()) {
             ?>
         </div>
     </div>
-<?php }
+<?php 
 ?>
 <?php get_footer() ?>
