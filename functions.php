@@ -289,4 +289,24 @@ function register_custom_post_type_order()
 }
 add_action('init', 'register_custom_post_type_order');
 
+function register_product_sidebar() {
+    register_sidebar([
+        'name'          => 'Сайдбар товаров',
+        'id'            => 'product_sidebar',
+        'before_widget' => '<div class="widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="widget-title">',
+        'after_title'   => '</h3>',
+    ]);
+}
+add_action('widgets_init', 'register_product_sidebar');
+require get_template_directory() . '/product-rating-widget.php';
+
+// Регистрируем виджет
+function register_product_rating_widget() {
+    register_widget('Product_Rating_Widget');
+}
+add_action('widgets_init', 'register_product_rating_widget');
+
+
 

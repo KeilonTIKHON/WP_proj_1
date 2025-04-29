@@ -3,6 +3,12 @@
 <div class="container mt-5">
     <h1 class="mb-4">Product catalogue</h1>
 
+    <?php if (is_active_sidebar('product_sidebar')): ?>
+            <aside class="sidebar-products">
+                <?php dynamic_sidebar('product_sidebar'); ?>
+            </aside>
+        <?php endif; ?>
+
     <?php
     // Получаем текущую страницу
     $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
@@ -18,6 +24,8 @@
     $query = new WP_Query($args);
 
     if ($query->have_posts()): ?>
+        
+
         <div class="row">
             <?php while ($query->have_posts()):
                 $query->the_post(); ?>
