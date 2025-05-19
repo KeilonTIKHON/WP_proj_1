@@ -3,11 +3,7 @@
 <div class="container mt-5">
     <h1 class="mb-4">Product catalogue</h1>
 
-    <?php if (is_active_sidebar('product_sidebar')): ?>
-            <aside class="sidebar-products">
-                <?php dynamic_sidebar('product_sidebar'); ?>
-            </aside>
-        <?php endif; ?>
+
 
     <?php
     // Получаем текущую страницу
@@ -21,35 +17,44 @@
     );
 
     // Запускаем WP_Query
-    $query = new WP_Query($args);
+    
 
     if ($query->have_posts()): ?>
-        
 
-        <div class="row">
-            <?php while ($query->have_posts()):
-                $query->the_post(); ?>
-                <div class="col-md-3 mb-4">
-                    <div class="card h-100">
-                        <div class="product-card">
-                            <img src="<?php the_post_thumbnail_url('medium'); ?>" class="card-img-top"
-                                alt="<?php the_title(); ?>">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                            </h5>
-                            <?php $price = get_field('price'); ?>
-                            <?php if ($price): ?>
-                                <p class="card-text"><strong>Price:</strong> <?php echo esc_html($price) . " $"; ?> </p>
-                            <?php endif; ?>
-                            <p class="card-text"><?php the_excerpt(); ?></p>
-                            <a href="<?php the_permalink(); ?>" class="btn btn-primary">Buy</a>
+        <div class="sidebar_cont">
+            <div class="row">
+
+
+                <?php while ($query->have_posts()):
+                    $query->the_post(); ?>
+                    <div class="col-md-3 mb-4">
+                        <div class="card h-100">
+                            <div class="product-card">
+                                <img src="<?php the_post_thumbnail_url('medium'); ?>" class="card-img-top"
+                                    alt="<?php the_title(); ?>">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                </h5>
+                                <?php $price = get_field('price'); ?>
+                                <?php if ($price): ?>
+                                    <p class="card-text"><strong>Price:</strong> <?php echo esc_html($price) . " $"; ?> </p>
+                                <?php endif; ?>
+                                <p class="card-text"><?php the_excerpt(); ?></p>
+                                <a href="<?php the_permalink(); ?>" class="btn btn-primary">Buy</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            <?php endwhile; ?>
+                <?php endwhile; ?>
+            </div>
+            <?php if (is_active_sidebar('product_sidebar')): ?>
+                <aside class="sidebar-products">
+                    <?php dynamic_sidebar('product_sidebar'); ?>
+                </aside>
+            <?php endif; ?>
         </div>
+
 
         <!-- Пагинация -->
         <!-- Пагинация -->

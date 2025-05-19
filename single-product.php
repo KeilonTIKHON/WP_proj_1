@@ -1,7 +1,6 @@
 <?php get_header() ?>
 
-<?php
-    the_post(); ?>
+
     <div><?php ?>
         <h1>This is a product</h1>
         <h2><?php the_title() ?></h2>

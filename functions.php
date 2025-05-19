@@ -251,6 +251,61 @@ function register_custom_post_type_product()
     register_post_type('product', $args);
 }
 add_action('init', 'register_custom_post_type_product');
+
+function set_product_per_page( $query ) {
+    if(!is_admin(  ) && $query->is_main_query()&& is_post_type_archive( 'product' )){
+        $query->set('posts_per_page', 12);
+    }
+}
+add_action('pre_get_posts','set_product_per_page' );
+
+add_action('wp_ajax_nopriv_ajax_register_user', 'ajax_register_user');
+function ajax_register_user() {
+    check_ajax_referer('auth_nonce', 'nonce');
+
+    $login = sanitize_user($_POST['login']);
+    $email = sanitize_email($_POST['email']);
+    $pass = $_POST['pass'];
+    $name = sanitize_text_field($_POST['name']);
+
+    if (username_exists($login) || email_exists($email)) {
+        wp_send_json(['success' => false, 'message' => 'Пользователь уже существует']);
+    }
+
+    $user_id = wp_create_user($login, $pass, $email);
+    wp_update_user(['ID' => $user_id, 'display_name' => $name]);
+
+    wp_send_json(['success' => true, 'message' => 'Успешная регистрация']);
+}
+
+add_action('wp_ajax_nopriv_ajax_login_user', 'ajax_login_user');
+function ajax_login_user() {
+    check_ajax_referer('auth_nonce', 'nonce');
+
+    $creds = [
+        'user_login' => $_POST['email'],
+        'user_password' => $_POST['pass'],
+        'remember' => true
+    ];
+
+    $user = wp_signon($creds, false);
+
+    if (is_wp_error($user)) {
+        wp_send_json(['success' => false, 'message' => 'Неверный логин или пароль']);
+    } else {
+        wp_send_json(['success' => true, 'message' => 'Добро пожаловать']);
+    }
+}
+
+
+function enqueue_auth_scripts() {
+    wp_enqueue_script('auth-js', get_template_directory_uri() . '/js/auth.js', ['jquery'], null, true);
+    wp_localize_script('auth-js', 'auth_ajax', [
+        'ajaxurl' => admin_url('admin-ajax.php'),
+        'nonce' => wp_create_nonce('auth_nonce')
+    ]);
+}
+add_action('wp_enqueue_scripts', 'enqueue_auth_scripts');
 function register_custom_post_type_order()
 {
     $labels = array(

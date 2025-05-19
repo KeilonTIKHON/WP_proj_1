@@ -1,6 +1,5 @@
 <?php get_header() ?>
-<?php
-    the_post(); ?>
+
     <div>
         <h1>This is a page</h1>
         <h2><?php the_title() ?></h2>

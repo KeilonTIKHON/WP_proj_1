@@ -21,6 +21,12 @@
                     ));
                     ?>
                 </div>
+                <?php if (is_user_logged_in()) : 
+    $current_user = wp_get_current_user(); ?>
+    <span class="user-greeting">Привет, <?php echo esc_html($current_user->display_name); ?></span>
+<?php else : ?>
+    <button id="open-auth-popup">Регистрация / Вход</button>
+<?php endif; ?>
             </div>
             <div class="cart_Plus_menu">
                 <div id="cart-icon" style="position: relative; top:8px; left:-10px; cursor: pointer;">

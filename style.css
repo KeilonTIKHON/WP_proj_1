@@ -105,4 +105,7 @@ body{
     height:50px;
     position: relative;
 }
+.sidebar_cont{
+    display: flex;
+}
   
