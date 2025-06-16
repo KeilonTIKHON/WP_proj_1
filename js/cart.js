@@ -1,12 +1,3 @@
-
-
-
-
-
-
-
-
-
 document.addEventListener("DOMContentLoaded", function () {
     const cartIcon = document.getElementById("cart-icon");
     const cartPopup = document.getElementById("cart-popup");
@@ -15,6 +6,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const cartCount = document.getElementById("cart-count");
     const smth = document.getElementById("checkout-button")
 
+    const emailField = document.querySelector("#order-email");
+            if (emailField && typeof CurrentUserData !== 'undefined' && CurrentUserData.email && emailField.value.trim() === "") {
+                emailField.value = CurrentUserData.email;
+            }
 
     function getCart() {
         let cart = Cookies.get("cart");
@@ -119,6 +114,7 @@ function getCookie(name) {
     if (checkoutBtn) {
         console.log('hi')
       checkoutBtn.addEventListener("click", function () {
+        
         const name = document.querySelector("#order-name").value;
         const email = document.querySelector("#order-email").value;
         const cart = getCookie("cart");

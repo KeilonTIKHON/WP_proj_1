@@ -5,8 +5,8 @@ class Product_Rating_Widget extends WP_Widget {
     public function __construct() {
         parent::__construct(
             'product_rating_widget',
-            'Рейтинг товаров',
-            ['description' => 'Показывает 5 товаров с самым высоким рейтингом.']
+            'Top products',
+            ['description' => 'lists 5 products with highest raiting.']
         );
     }
 
@@ -29,11 +29,11 @@ class Product_Rating_Widget extends WP_Widget {
             while ($query->have_posts()) {
                 $query->the_post();
                 $rating = get_post_meta(get_the_ID(), 'raiting', true);
-                echo '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a> — ' . esc_html($rating) . '</li>';
+                echo '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a> </br> ' . esc_html($rating) . '/5</li>';
             }
             echo '</ul>';
         } else {
-            echo '<p>Товары не найдены.</p>';
+            echo '<p>Products not found.</p>';
         }
 
         wp_reset_postdata();
@@ -41,10 +41,10 @@ class Product_Rating_Widget extends WP_Widget {
     }
 
     public function form($instance) {
-        $title = !empty($instance['title']) ? $instance['title'] : 'Рейтинг товаров';
+        $title = !empty($instance['title']) ? $instance['title'] : 'Top rated products';
         ?>
         <p>
-            <label for="<?php echo esc_attr($this->get_field_id('title')); ?>">Заголовок:</label>
+            <label for="<?php echo esc_attr($this->get_field_id('title')); ?>">Header:</label>
             <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>"
                    name="<?php echo esc_attr($this->get_field_name('title')); ?>" type="text"
                    value="<?php echo esc_attr($title); ?>">

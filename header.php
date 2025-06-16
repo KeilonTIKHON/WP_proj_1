@@ -21,12 +21,12 @@
                     ));
                     ?>
                 </div>
-                <?php if (is_user_logged_in()) : 
-    $current_user = wp_get_current_user(); ?>
-    <span class="user-greeting">Привет, <?php echo esc_html($current_user->display_name); ?></span>
-<?php else : ?>
-    <button id="open-auth-popup">Регистрация / Вход</button>
-<?php endif; ?>
+                <?php if (is_user_logged_in()):
+                    $current_user = wp_get_current_user(); ?>
+                    <span class="user-greeting">Hello, <?php echo esc_html($current_user->display_name); ?></span>
+                <?php else: ?>
+                    <button id="open-auth-popup">Sign up / Log In</button>
+                <?php endif; ?>
             </div>
             <div class="cart_Plus_menu">
                 <div id="cart-icon" style="position: relative; top:8px; left:-10px; cursor: pointer;">
@@ -37,17 +37,21 @@
                 </button>
             </div>
         </div>
-
+        <?php if (is_user_logged_in()): ?>
+            <a href="<?php echo esc_url(site_url('/user-cabinet')); ?>" class="btn-cabinet">
+                Личный кабинет
+            </a>
+        <?php endif; ?>
         <div id="cart-popup"
             style="display:none; position: absolute; top: 50px; right: 10px; background: #fff; border: 1px solid #ccc; padding: 20px; z-index: 1000;">
             <h3>Cart</h3>
             <div id="cart-items"></div>
             <div>Total: <span id="cart-total">0 $</span></div>
             <div id="order-form">
-                <h3>Оформление заказа</h3>
+                <h3>Order</h3>
                 <input type="text" id="order-name" placeholder="ФИО" required />
                 <input type="email" id="order-email" placeholder="Email" required />
-                <button id="checkout-button">Оформить заказ</button>
+                <button id="checkout-button">List order</button>
             </div>
         </div>
     </nav>

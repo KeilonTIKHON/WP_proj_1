@@ -8,6 +8,10 @@ body{
     padding: 0px;
     margin: 0px;
 }
+body .container{
+    
+    
+}
 
 .card-img-top{
     height:100%;
@@ -17,8 +21,8 @@ body{
 }
 .product-card img {
     
-    width: 150px;
-    height: 150px; /* Фиксируем высоту */
+    width: 120px;
+    height: 120px; /* Фиксируем высоту */
     object-fit: contain; /* Заполняет область без искажения */
     border-radius: 8px;
 }
@@ -106,6 +110,41 @@ body{
     position: relative;
 }
 .sidebar_cont{
-    display: flex;
+    position: relative;
+    width:85%;
+    
+    
 }
+.sidebar-products{
+    
+}
+.costil{
+    position: absolute;
+    top:0px;
+    left:105%;
+    max-width: 150px;
+}
+.product-rating-list{
+    padding: 0px;
+    list-style: none;
+}
+.btn-cabinet {
+    display: inline-block;
+    padding: 10px 16px;
+    background-color: #0073aa;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-left: 15px;
+    transition: background 0.3s;
+}
+
+.btn-cabinet:hover {
+    background-color: #005c8a;
+}
+#user-orders ul{
+    list-style: none;
+    padding: 0px;
+}
+
   
