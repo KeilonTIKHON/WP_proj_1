@@ -1,0 +1,150 @@
+/*
+Theme Name:mytheme
+*/
+
+body{
+    box-sizing: border-box;
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+}
+body .container{
+    
+    
+}
+
+.card-img-top{
+    height:100%;
+}
+.card_img_cont{
+    height:150px;
+}
+.product-card img {
+    
+    width: 120px;
+    height: 120px; /* Фиксируем высоту */
+    object-fit: contain; /* Заполняет область без искажения */
+    border-radius: 8px;
+}
+.thing{
+    padding: 15px;
+    height: 200px;
+}
+.test{
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    
+}
+.meta_cont{
+    background-color: rgb(210, 210, 210);
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+}
+.meta_child_cont{
+    font-size: 20px;
+    margin: 20px;
+}
+/*
+.card .card {
+    border: none;
+  }
+*/
+.comments-area {
+    margin-top: 2em;
+}
+
+.comment-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.comment {
+    margin-bottom: 1.5em;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1em;
+}
+
+.comment-author {
+    font-weight: bold;
+}
+
+.comment-form {
+    margin-top: 2em;
+}
+
+.comment-form input,
+.comment-form textarea {
+    width: 100%;
+    padding: 0.75em;
+    margin-bottom: 1em;
+    border: 1px solid #ccc;
+}
+.prod-image img{
+    width: 550px;
+    height: 550px; /* Фиксируем высоту */
+    object-fit: contain;
+}
+.add_to_cart{
+    width:200px;
+    margin: 30px;
+}
+.cart_Plus_menu{
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 0.5;
+}
+.navbar-collapse {
+    flex-basis: 100%;
+    flex-grow: 0.5;
+    align-items: center;
+}
+.cont_container{
+    width:100vw;
+    display: flex;
+}
+.navbar-toggler{
+    height:50px;
+    position: relative;
+}
+.sidebar_cont{
+    position: relative;
+    width:85%;
+    
+    
+}
+.sidebar-products{
+    
+}
+.costil{
+    position: absolute;
+    top:0px;
+    left:105%;
+    max-width: 150px;
+}
+.product-rating-list{
+    padding: 0px;
+    list-style: none;
+}
+.btn-cabinet {
+    display: inline-block;
+    padding: 10px 16px;
+    background-color: #0073aa;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-left: 15px;
+    transition: background 0.3s;
+}
+
+.btn-cabinet:hover {
+    background-color: #005c8a;
+}
+#user-orders ul{
+    list-style: none;
+    padding: 0px;
+}
+
+  
